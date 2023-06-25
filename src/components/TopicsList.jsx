@@ -3,6 +3,8 @@ import RemoveBTN from './RemoveBTN';
 import Link from 'next/link';
 import {FaPencilAlt} from "react-icons/fa"
 
+const getTopic
+
 const TopicsList = () => {
     return (
         <div className='p-4 border border-slate-300 my-3 flex justify-between'>
