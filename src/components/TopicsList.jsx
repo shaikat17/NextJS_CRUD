@@ -1,25 +1,44 @@
-import React from 'react';
-import RemoveBTN from './RemoveBTN';
-import Link from 'next/link';
-import {FaPencilAlt} from "react-icons/fa"
+import React from "react";
+import RemoveBTN from "./RemoveBTN";
+import Link from "next/link";
+import { FaPencilAlt } from "react-icons/fa";
 
-const getTopic
+const getTopic = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/api/topics", {
+      cache: "no-store",
+    });
+    if (!res.ok) {
+      throw new Error("Failed to fetch topics.");
+    }
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-const TopicsList = () => {
-    return (
-        <div className='p-4 border border-slate-300 my-3 flex justify-between'>
+const TopicsList = async () => {
+  const { topics } = await getTopic();
+  return (
+    <>
+      {topics.map((topic) => {
+        return (
+          <div className="p-4 border border-slate-300 my-3 flex justify-between" key={topic._id}>
             <div>
-                <h1 className='font-black text-2xl'>Topic Title</h1>
-                <p>topic description</p>
+              <h1 className="font-black text-2xl">{topic.title}</h1>
+              <p>{topic.description}</p>
             </div>
-            <div className='flex gap-4'>
-                <RemoveBTN />
-                <Link href={"/edit/233"}>
+            <div className="flex gap-4">
+              <RemoveBTN />
+              <Link href={`/edit/${topic._id}`}>
                 <FaPencilAlt size={24} />
-                </Link>
+              </Link>
             </div>
-        </div>
-    );
+          </div>
+        );
+      })}
+    </>
+  );
 };
 
 export default TopicsList;

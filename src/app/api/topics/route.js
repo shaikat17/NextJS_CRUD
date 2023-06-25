@@ -3,14 +3,15 @@ import Topic from "@/models/topic";
 import { NextResponse } from "next/server";
 
 
-export const POST = async () => {
-    const {title, description} = await Request.json()
+export const POST = async (request) => {
+    const {title, description} = await request.json()
+    console.log(title, description)
     await  connectMongoDB()
     await Topic.create({title, description})
     return NextResponse.json({message: "Topic Created"}, {status: 201})
 };
 
-export const Get = async () => {
+export const GET = async () => {
     await connectMongoDB()
     const topics = await Topic.find()
     return NextResponse.json({topics})
