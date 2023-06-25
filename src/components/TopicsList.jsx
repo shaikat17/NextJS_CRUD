@@ -5,7 +5,7 @@ import {FaPencilAlt} from "react-icons/fa"
 
 const TopicsList = () => {
     return (
-        <div className='p-4 border-slate-300 my-3 flex justify-between'>
+        <div className='p-4 border border-slate-300 my-3 flex justify-between'>
             <div>
                 <h1 className='font-black text-2xl'>Topic Title</h1>
                 <p>topic description</p>
