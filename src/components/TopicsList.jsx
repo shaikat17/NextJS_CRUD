@@ -5,7 +5,7 @@ import { FaPencilAlt } from "react-icons/fa";
 
 const getTopic = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/topics", {
+    const res = await fetch(`${process.env.host_url}api/topics`, {
       cache: "no-store",
     });
     if (!res.ok) {
@@ -23,7 +23,10 @@ const TopicsList = async () => {
     <>
       {topics.map((topic) => {
         return (
-          <div className="p-4 border border-slate-300 my-3 flex justify-between" key={topic._id}>
+          <div
+            className="p-4 border border-slate-300 my-3 flex justify-between"
+            key={topic._id}
+          >
             <div>
               <h1 className="font-black text-2xl">{topic.title}</h1>
               <p>{topic.description}</p>

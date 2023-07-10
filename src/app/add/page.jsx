@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Add = () => {
   const router = useRouter();
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +16,7 @@ const page = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/topics", {
+      const res = await fetch(`/api/topics`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -24,6 +24,7 @@ const page = () => {
         body: JSON.stringify({ title, description }),
       });
       if (res.ok) {
+        router.refresh()
         router.push("/");
       } else {
         throw new Error("Failed to create a topic. ");
@@ -53,4 +54,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Add;
